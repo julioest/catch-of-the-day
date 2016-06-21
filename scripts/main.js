@@ -2,10 +2,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
+var Router  = ReactRouter.Router;
 var Route = ReactRouter.Route;
-var Navigation = ReactRouter.Navigation;
-
 var History = ReactRouter.History;
 var createBrowserHistory = require('history/lib/createBrowserHistory');
 
@@ -29,6 +27,11 @@ var App = React.createClass({
     // set the state
     this.setState({ fishes : this.state.fishes });
   },
+  loadSamples : function(){
+    this.setState({
+      fishes : require('./sample-fishes')
+    });
+  },
   render : function(){
     return (
       <div className="catch-of-the-day">
@@ -36,7 +39,7 @@ var App = React.createClass({
           <Header tagline="Fresh Seafood Market"/>
         </div>
         <Order />
-        <Inventory addFish={this.addFish}/>
+        <Inventory addFish={this.addFish} loadSamples={this.loadSamples}/>
       </div>
     )
   }
@@ -61,10 +64,12 @@ var AddFishForm = React.createClass({
     }
     console.log(fish);
     // 3. Add the fish to the App state
+    this.props.addFish(fish);
+    this.refs.fishForm.reset();
   },
   render: function() {
     return (
-      <form className="fish-edit" onSubmit={this.createFish}>
+      <form className="fish-edit" ref="fishForm" onSubmit={this.createFish}>
         <input type="text" ref="name" placeholder="Fish Name"/>
         <input type="text" ref="price" placeholder="Fish Price" />
         <select ref="status">
@@ -126,6 +131,7 @@ var Inventory = React.createClass({
       <div>
         <h2>Inventory</h2>
         <AddFishForm {...this.props} />
+        <button onClick={this.props.loadSamples}>Load sample fishes!</button>
       </div>
     )
   }
