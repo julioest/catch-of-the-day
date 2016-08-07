@@ -21,7 +21,7 @@
     "connect-history-api-fallback": "1.1.0",
     "eslint": "^2.13.0",
     "eslint-plugin-react": "^5.2.2",
-    "firebase": "2.3.1",
+    "firebase": "^3.2.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "3.1.0",
     "gulp-notify": "2.2.0",
@@ -42,5 +42,6 @@
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0",
     "watchify": "3.4.0"
-  }
+  },
+  "dependencies": {}
 }
